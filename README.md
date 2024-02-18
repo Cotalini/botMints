@@ -30,7 +30,7 @@ To install botMints, follow these detailed steps:
 1. **Clone the repository 📁:**
    Open your terminal or command prompt and run:
    ```bash
-   git clone https://github.com/yourusername/botMints.git
+   git clone https://github.com/Cotalini/botMints.git
 2. **Navigate to the project directory 🚀:**
     Change your current directory to botMints:
     ```bash
