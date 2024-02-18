@@ -1,0 +1,14 @@
+{   
+    "candyMachineAddress": "eWHSFTMVN7DSAoHMwLv4JToSkAUXNGJmZXPoLFWt9Xv",
+    "startTime": 1708210800,
+    "endTime": 1708210860,
+    "rpc": "https://swr.xnftdata.com/rpc-proxy/",
+    "address": {
+        "Blood": "FHPu14ZCs6R7Rn6ayAcszxBy6J4GL7EcYJELY2oVMhWe",
+        "Pepper": "FUigYUS3EPJB682u6mCgvox7JMfHn6KxqhYdnLmqm2pe",
+        "Vision": "2YZsjGLEkA3QGph7gW3i95Sq5qjEK6J9V4WDNPFh29Z5",
+        "DashAIO": "4Q81N3hL6WEC5JcBcKKudQm9rW5tmRrhvcrkrjUezjF2",
+        "MinterSuite": "HhZ155pDFXdynmkaaCxAsZjYXwHxtq5bStmAVUbDMU3o",
+        "SilverAIO": "DDR7EyQ2Z4iLxPHt8AUsCAFYHrEc5Kp7VE9DKBL5otvD"
+    }
+}
