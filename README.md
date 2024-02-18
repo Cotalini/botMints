@@ -46,6 +46,7 @@ To install botMints, follow these detailed steps:
 Adjust the config.json file to set up your specific parameters 🔧:
 ```json
 {
+    "candyMachineAddress": "eWHSFTMVN7DSAoHMwLv4JToSkAUXNGJmZXPoLFWt9Xv",
     "startTime": 1708210800,
     "endTime": 1708210860,
     "rpc": "https://swr.xnftdata.com/rpc-proxy/",
