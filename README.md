@@ -4,6 +4,9 @@
 
 botMints is a Node.js application designed to fetch and analyze transactions from the Solana blockchain, focusing on Candy Machine transactions 🍬. It categorizes transactions, calculates fees, and outputs data into a user-friendly CSV format 📊. This tool is especially useful for monitoring and auditing blockchain transactions to identify bot activities 🕵️‍♂️.
 
+![Example Image](https://cdn.discordapp.com/attachments/969036656885792778/1208691453593915412/image.png?ex=65e434a2&is=65d1bfa2&hm=20a7d517ff72c56251f8c0ee27ebd925c69a83f17276367937f23499304eba46&)
+
+
 ## 📋 Requirements
 
 Before installing botMints, ensure you have the following:
@@ -37,7 +40,7 @@ To install botMints, follow these detailed steps:
     ```bash
     npm install
 4. **Run botMints:**
-  
+
 
 ## ⚙️ Configuration
 Adjust the config.json file to set up your specific parameters 🔧:
