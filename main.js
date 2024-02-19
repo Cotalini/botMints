@@ -36,6 +36,8 @@ async function fetchAllTransactions(connection, publicKey, startTime, endTime) {
         before = signatures[signatures.length - 1].signature;
     }
 
+    console.log(allSignatures)
+
     // Return all collected signatures.
     return allSignatures;
 }
@@ -62,7 +64,7 @@ async function fetchCandyMachineMintTransactions(candyMachineAddress, startTime,
     let botTransactionCounts = Object.fromEntries(Object.keys(botAddresses).map(bot => [bot, 0]));
 
     // Define the size of each batch of transactions to process.
-    const batchSize = 150;
+    const batchSize = 100;
     // Process transactions in batches.
     for (let i = 0; i < signatures.length; i += batchSize) {
         // Create promises for each batch of transactions.
@@ -78,38 +80,29 @@ async function fetchCandyMachineMintTransactions(candyMachineAddress, startTime,
         // Process each transaction.
         for (const transaction of transactions) {
             try {
-                // Check if the transaction is valid and not errored.
                 if (transaction && transaction.meta && transaction.meta.err === null) {
-                    let involvedAddress = null;
-                    // Get the involved address from the transaction (if available).
-                    if (transaction.transaction.message.accountKeys && transaction.transaction.message.accountKeys.length > 0) {
-                        involvedAddress = transaction.transaction.message.addressTableLookups[0].accountKey.toString();
-                    }
+                    // Check for the specific log message indicating a valid Candy Machine mint transaction.
+                    if (transaction.meta.logMessages && transaction.meta.logMessages.some(log => log.startsWith('Program log: Create')) || transaction.meta.logMessages.some(log => log.startsWith('Program log: Instruction: MintToCollectionV1'))) {
+                        let involvedAddress = transaction.transaction.message.addressTableLookups[0].accountKey.toString();
+                        const fee = transaction.meta.fee / 1e9; // Convert lamports to SOL
+                        let isBotTransaction = false;
 
-                    // Calculate the transaction fee in SOL (lamports to SOL conversion).
-                    const fee = transaction.meta.fee / 1e9;
-                    let isBotTransaction = false;
-
-                    // Check if the transaction involves a known bot address.
-                    for (const [name, botAddress] of Object.entries(botAddresses)) {
-                        if (involvedAddress === botAddress) {
-                            const signature = transaction.transaction.signatures[0];
-                            // Add the transaction to the CSV rows.
-                            csvRows.push(`${signature},${name},${fee.toFixed(9)}`);
-                            // Increment the count for the bot.
-                            botTransactionCounts[name]++;
-                            isBotTransaction = true;
-                            break;
+                        for (const [name, botAddress] of Object.entries(botAddresses)) {
+                            if (involvedAddress === botAddress) {
+                                const signature = transaction.transaction.signatures[0];
+                                csvRows.push(`${signature},${name},${fee.toFixed(9)}`);
+                                botTransactionCounts[name]++;
+                                isBotTransaction = true;
+                                break;
+                            }
                         }
-                    }
 
-                    // If the transaction is not a bot transaction, increment the unmarked transaction count.
-                    if (!isBotTransaction) {
-                        unmarkedTxCount++;
+                        if (!isBotTransaction) {
+                            unmarkedTxCount++;
+                        }
                     }
                 }
             } catch (error) {
-                // Increment the unmarked transaction count in case of an error.
                 unmarkedTxCount++;
             }
 
