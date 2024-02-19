@@ -62,7 +62,7 @@ async function fetchCandyMachineMintTransactions(candyMachineAddress, startTime,
     let botTransactionCounts = Object.fromEntries(Object.keys(botAddresses).map(bot => [bot, 0]));
 
     // Define the size of each batch of transactions to process.
-    const batchSize = 300;
+    const batchSize = 150;
     // Process transactions in batches.
     for (let i = 0; i < signatures.length; i += batchSize) {
         // Create promises for each batch of transactions.
